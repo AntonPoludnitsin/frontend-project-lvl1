@@ -21,14 +21,21 @@ const getQuestion = (num, name) => {
   }
 };
 
+const getRandomNumber = () => Math.ceil(Math.random() * 20);
+
 export const getName = () => {
   console.log('Welcome to the Brain Games!');
   const name = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${name}!`);
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
-  getQuestion(15, name, result);
-  getQuestion(14, name, result);
-  getQuestion(13, name, result);
+  getQuestion(getRandomNumber(), name, result);
+  if (result === 1) {
+    getQuestion(getRandomNumber(), name, result);
+  }
+  if (result === 2) {
+    getQuestion(getRandomNumber(), name, result);
+  }
+  
   if (result === 3) {
     console.log(`Congratulations, ${name}!`);
   }
