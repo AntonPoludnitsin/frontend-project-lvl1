@@ -35,7 +35,6 @@ export const getName = () => {
   if (result === 2) {
     getQuestion(getRandomNumber(), name, result);
   }
-  
   if (result === 3) {
     console.log(`Congratulations, ${name}!`);
   }
