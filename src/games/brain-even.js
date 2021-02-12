@@ -12,7 +12,8 @@ const getCorrectAnswer = (num) => {
 const getQuestion = (num, name) => {
   console.log(`Question: ${num}`);
   const answer = readlineSync.question('Your answer: ');
-  if (answer === getCorrectAnswer(num)) {
+  const correctAnswer = getCorrectAnswer(num);
+  if (answer === correctAnswer) {
     console.log('Correct!');
     result += 1;
   } else {
