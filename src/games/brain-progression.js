@@ -27,7 +27,7 @@ const hideElement = (array, index) => {
 
 const getQuestion = () => {
   const array = getProgression();
-  const arrayWithoutElement = hideElement(array, indexOfHiddenElement);
+  const arrayWithoutElement = hideElement(array, indexOfHiddenElement).join(' ');
   console.log(`Question: ${arrayWithoutElement}`);
 
   const correctAnswer = String(array[indexOfHiddenElement]);
