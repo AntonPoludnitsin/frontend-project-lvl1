@@ -18,7 +18,7 @@ const getQuestion = (num, name) => {
     result += 1;
   } else {
     console.log(`'${answer}' is wrong answer ;(. Correct answer was '${getCorrectAnswer(num)}'.`);
-    console.log(`let's try again, ${name}`);
+    console.log(`Let's try again, ${name}`);
   }
 };
 
