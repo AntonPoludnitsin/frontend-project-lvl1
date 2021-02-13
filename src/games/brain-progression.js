@@ -26,7 +26,7 @@ const getProgression = () => {
 const getQuestion = () => {
   console.log(`Question: ${getProgression()}`);
   const answer = readlineSync.question('Your answer: ');
-  if (+answer === correctAnswer) {
+  if (answer === String(correctAnswer)) {
     console.log('Correct!');
     result += 1;
   } else {
