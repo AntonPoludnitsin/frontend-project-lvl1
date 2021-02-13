@@ -24,7 +24,7 @@ const getQuestion = (num, name) => {
 
 const getRandomNumber = () => Math.ceil(Math.random() * 20);
 
-export const startEvenGame = () => {
+export default () => {
   console.log('Welcome to the Brain Games!');
   const name = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${name}!`);
