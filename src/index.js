@@ -4,7 +4,7 @@ import { startGcdGame } from './games/brain-gcd.js';
 import { startProgressionGame } from './games/brain-progression.js';
 import { startPrimeGame } from './games/brain-prime.js';
 
-export const startGame = (title) => {
+export default (title) => {
   if (title === 'even') {
     startEvenGame();
   }
