@@ -3,30 +3,36 @@ import readlineSync from 'readline-sync';
 let name = null;
 let result = 0;
 const lengthProgression = 10;
-let correctAnswer = null;
+
 const getRandomNumber = (number) => Math.floor(Math.random() * number);
+const indexOfHiddenElement = getRandomNumber(lengthProgression);
 const getProgression = () => {
   const firstItem = getRandomNumber(30);
-  const diffItem = getRandomNumber(30);
-  const missingItem = getRandomNumber(lengthProgression);
+  const step = getRandomNumber(30);
   let count = firstItem;
   const progression = [firstItem];
   for (let i = 1; i < lengthProgression; i += 1) {
-    count += diffItem;
-    if (i === missingItem) {
-      correctAnswer = count;
-      progression.push('..');
-    } else {
-      progression.push(count);
-    }
+    count += step;
+    progression.push(count);
   }
-  return progression.join(' ');
+
+  return progression;
+};
+
+const hideElement = (array, index) => {
+  const copyArray = [...array];
+  copyArray[index] = '..';
+  return copyArray;
 };
 
 const getQuestion = () => {
-  console.log(`Question: ${getProgression()}`);
+  const array = getProgression();
+  const arrayWithoutElement = hideElement(array, indexOfHiddenElement);
+  console.log(`Question: ${arrayWithoutElement}`);
+
+  const correctAnswer = String(array[indexOfHiddenElement]);
   const answer = readlineSync.question('Your answer: ');
-  if (answer === String(correctAnswer)) {
+  if (answer === correctAnswer) {
     console.log('Correct!');
     result += 1;
   } else {
