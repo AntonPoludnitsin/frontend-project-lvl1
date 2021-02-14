@@ -1,7 +1,4 @@
-import readlineSync from 'readline-sync';
-
-let name = null;
-let result = 0;
+import getRandomNumber from '../utils/random.js';
 
 const getCorrectAnswer = (a, b) => {
   if (!b) {
@@ -10,34 +7,14 @@ const getCorrectAnswer = (a, b) => {
   return getCorrectAnswer(b, a % b);
 };
 
-const getQuestion = (num, num2) => {
-  console.log(`Question: ${num} ${num2}`);
-  const correctAnswer = getCorrectAnswer(num, num2);
-  const answer = readlineSync.question('Your answer: ');
-  if (+answer === correctAnswer) {
-    console.log('Correct!');
-    result += 1;
-  } else {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-    console.log(`Let's try again, ${name}!`);
-  }
+const description = 'Find the greatest common divisor of given numbers.';
+
+const getQuestionAndCorrectNumber = () => {
+  const num1 = getRandomNumber();
+  const num2 = getRandomNumber();
+  const correctAnswer = getCorrectAnswer(num1, num2).toString();
+  const question = `${num1} ${num2}`;
+  return { question, correctAnswer };
 };
 
-const getRandomNumber = (number) => Math.floor(Math.random() * number);
-
-export default () => {
-  console.log('Welcome to the Brain Games!');
-  name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}!`);
-  console.log('Find the greatest common divisor of given numbers.');
-  getQuestion(getRandomNumber(100), getRandomNumber(200));
-  if (result === 1) {
-    getQuestion(getRandomNumber(100), getRandomNumber(200));
-  }
-  if (result === 2) {
-    getQuestion(getRandomNumber(20), getRandomNumber(100));
-  }
-  if (result === 3) {
-    console.log(`Congratulations, ${name}!`);
-  }
-};
+export default { description, getQuestionAndCorrectNumber };

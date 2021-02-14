@@ -1,23 +1,26 @@
-import startEvenGame from './games/brain-even.js';
-import startCalcGame from './games/brain-calc.js';
-import startGcdGame from './games/brain-gcd.js';
-import startProgressionGame from './games/brain-progression.js';
-import startPrimeGame from './games/brain-prime.js';
+import readlineSync from 'readline-sync';
 
-export default (title) => {
-  if (title === 'even') {
-    startEvenGame();
+const roundCount = 2;
+const welcomeText = 'Welcome to the Brain Games!';
+
+export default (game) => {
+  const { description, getQuestionAndCorrectNumber } = game;
+  console.log(welcomeText);
+  const name = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${name}!`);
+  console.log(description);
+  for (let i = 0; i <= roundCount; i += 1) {
+    const data = getQuestionAndCorrectNumber();
+    const { question, correctAnswer } = data;
+    console.log(`Question: ${question}`);
+    const answer = readlineSync.question('Your answer: ');
+    if (answer === correctAnswer) {
+      console.log('Correct!');
+    } else {
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
+      console.log(`Let's try again, ${name}!`);
+      return;
+    }
   }
-  if (title === 'calc') {
-    startCalcGame();
-  }
-  if (title === 'gcd') {
-    startGcdGame();
-  }
-  if (title === 'progression') {
-    startProgressionGame();
-  }
-  if (title === 'prime') {
-    startPrimeGame();
-  }
+  console.log(`Congratulations, ${name}!`);
 };

@@ -1,10 +1,7 @@
-import readlineSync from 'readline-sync';
+import getRandomNumber from '../utils/random.js';
 
-let name = null;
-let result = 0;
 const lengthProgression = 10;
 
-const getRandomNumber = (number) => Math.floor(Math.random() * number);
 const indexOfHiddenElement = getRandomNumber(lengthProgression);
 const getProgression = () => {
   const firstItem = getRandomNumber(30);
@@ -25,35 +22,14 @@ const hideElement = (array, index) => {
   return copyArray;
 };
 
-const getQuestion = () => {
+const description = 'What number is missing in the progression?';
+
+const getQuestionAndCorrectNumber = () => {
   const array = getProgression();
   const arrayWithoutElement = hideElement(array, indexOfHiddenElement).join(' ');
-  console.log(`Question: ${arrayWithoutElement}`);
-
   const correctAnswer = String(array[indexOfHiddenElement]);
-  const answer = readlineSync.question('Your answer: ');
-  if (answer === correctAnswer) {
-    console.log('Correct!');
-    result += 1;
-  } else {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-    console.log(`Let's try again, ${name}!`);
-  }
+  const question = arrayWithoutElement;
+  return { question, correctAnswer };
 };
 
-export default () => {
-  console.log('Welcome to the Brain Games!');
-  name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}!`);
-  console.log('What number is missing in the progression?');
-  getQuestion();
-  if (result === 1) {
-    getQuestion();
-  }
-  if (result === 2) {
-    getQuestion();
-  }
-  if (result === 3) {
-    console.log(`Congratulations, ${name}!`);
-  }
-};
+export default { description, getQuestionAndCorrectNumber };

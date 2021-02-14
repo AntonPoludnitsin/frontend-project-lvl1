@@ -1,9 +1,6 @@
-import readlineSync from 'readline-sync';
+import getRandomNumber from '../utils/random.js';
 
-let name = null;
-let result = 0;
-
-function getPrimes(num) {
+function getCorrectAnswer(num) {
   const seive = [];
   const primes = [];
 
@@ -18,34 +15,13 @@ function getPrimes(num) {
   return primes.includes(num) ? 'yes' : 'no';
 }
 
-const getQuestion = (num) => {
-  console.log(`Question: ${num}`);
-  const correctAnswer = getPrimes(num);
-  const answer = readlineSync.question('Your answer: ');
-  if (answer === correctAnswer) {
-    console.log('Correct!');
-    result += 1;
-  } else {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-    console.log(`Let's try again, ${name}!`);
-  }
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+
+const getQuestionAndCorrectNumber = () => {
+  const number = getRandomNumber(100);
+  const correctAnswer = getCorrectAnswer(number);
+  const question = number.toString();
+  return { question, correctAnswer };
 };
 
-const getRandomNumber = (number) => Math.floor(Math.random() * number);
-
-export default () => {
-  console.log('Welcome to the Brain Games!');
-  name = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${name}!`);
-  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-  getQuestion(getRandomNumber(100));
-  if (result === 1) {
-    getQuestion(getRandomNumber(100));
-  }
-  if (result === 2) {
-    getQuestion(getRandomNumber(20));
-  }
-  if (result === 3) {
-    console.log(`Congratulations, ${name}!`);
-  }
-};
+export default { description, getQuestionAndCorrectNumber };
